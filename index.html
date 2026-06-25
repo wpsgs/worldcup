@@ -6,662 +6,349 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pibli TV - Responsive Concept</title>
   <style>
-    /* =========================================
-           RESET & BASE STYLES
-           ========================================= */
-
-    /* From Uiverse.io by Praashoo7 */
-    /* CodePen Card */
-
-    .card {
-      width: 15em;
-      height: 10em;
-      background-color: #252525;
-      border-radius: 7px;
-      cursor: pointer;
-      
-      /* Atau gunakan nilai pixel tertentu, misalnya: height: 200px; */
-      overflow: hidden;
-      /* Opsional: Memastikan gambar tidak meluber keluar dari batas card (berguna jika card memiliki border-radius) */
-    }
-    .card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* Memaksa gambar memenuhi card tanpa membuatnya gepeng/distorsi */
-    }
-
-    .fl {
-      display: flex;
-      justify-content: flex-end;
-      opacity: 0;
-      transition: .2s ease-in-out;
-    }
-
-    .fl:hover .fullscreen {
-      scale: 1.2;
-    }
-
-    .fl:hover .fullscreen_svg {
-      fill: white;
-    }
-
-    .fullscreen {
-      width: 1.5em;
-      height: 1.5em;
-      border-radius: 5px;
-      background-color: #727890;
-      margin: 1em;
-      margin-right: 0.5em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: .2s ease-in-out;
-      box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
-    }
-
-    .fullscreen_svg {
-      width: 15px;
-      height: 15px;
-      fill: rgb(177, 176, 176);
-      transition: .2s ease-in-out;
-    }
-
-    .card_back {
-      position: absolute;
-      width: 15em;
-      height: 13em;
-      background-color: rgba(30, 31, 38, 0.575);
-      border-radius: 7px;
-      margin-top: -5em;
-      margin-left: 0.7em;
-      transition: .2s ease-in-out;
-      z-index: -1;
-    }
-
-    .main:hover .card_back {
-      margin-top: -6.25em;
-      margin-left: 0em;
-      scale: 1.1;
-      height: 15.25em;
-      cursor: pointer;
-    }
-
-    .main:hover .fl {
-      opacity: 1;
-      cursor: pointer;
-      margin-right: 0.5em;
-    }
-
-    .data {
-      display: flex;
-      flex-direction: row;
-      margin-top: 1em;
-    }
-
-    .img {
-      width: 2.25em;
-      height: 2.25em;
-      background-color: #252525;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .text {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      margin-left: 0.5em;
-      font-family: Montserrat;
-      color: white;
-    }
-
-    .text_m {
-      font-weight: bold;
-      font-size: 0.9em;
-    }
-
-    .text_s {
-      font-size: 0.7em;
-    }
-
-    .btns {
-      display: flex;
-      gap: 0.5em;
-      transition: .2s ease-in-out;
-    }
-
-    .likes {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.5em;
-      height: 1.4em;
-      border-radius: 4px;
-      margin-top: -0.5em;
-      opacity: 0;
-      background-color: #444857;
-      transition: .2s ease-in-out;
-    }
-
-    .likes_text {
-      font-family: Montserrat;
-      font-size: 0.8em;
-      margin-left: 0.25em;
-      color: white;
-    }
-
-    .likes_svg {
-      width: 12px;
-      height: 12px;
-      fill: white;
-    }
-
-    .likes:hover {
-      background-color: #5A5F73;
-      cursor: pointer;
-    }
-
-    .comments {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.5em;
-      height: 1.4em;
-      border-radius: 4px;
-      margin-top: -0.5em;
-      opacity: 0;
-      background-color: #444857;
-      transition: .24s ease-in-out;
-    }
-
-    .comments_text {
-      font-family: Montserrat;
-      font-size: 0.8em;
-      margin-left: 0.25em;
-      color: white;
-    }
-
-    .comments_svg {
-      width: 12px;
-      height: 12px;
-      fill: white;
-    }
-
-    .comments:hover {
-      background-color: #5A5F73;
-      cursor: pointer;
-    }
-
-    .views {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 3em;
-      height: 1.4em;
-      border-radius: 4px;
-      margin-top: -0.5em;
-      opacity: 0;
-      background-color: #444857;
-      transition: .28s ease-in-out;
-    }
-
-    .views_text {
-      font-family: Montserrat;
-      font-size: 0.8em;
-      margin-left: 0.25em;
-      color: white;
-    }
-
-    .views_svg {
-      width: 12px;
-      height: 12px;
-      fill: white;
-    }
-
-    .views:hover {
-      background-color: #5A5F73;
-      cursor: pointer;
-    }
-
-    .main:hover .likes {
-      margin-top: 0.5em;
-      opacity: 1;
-    }
-
-    .main:hover .comments {
-      margin-top: 0.5em;
-      opacity: 1;
-    }
-
-    .main:hover .views {
-      margin-top: 0.5em;
-      opacity: 1;
-    }
-
-
-
-    /* The Main Switch */
-
-    .card_content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
-    }
-
-    
-
-    /* The switch - the box around the slider */
-    .switch_738 {
-      font-size: 13px;
-      position: relative;
-      display: inline-block;
-      width: 1.2em;
-      height: 3.3em;
-    }
-
-    /* Hide default HTML checkbox */
-    .switch_738 .chk_738 {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    /* The slider */
-    .slider_738 {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 5px;
-    }
-
-    .slider_738:before {
-      position: absolute;
-      content: "";
-      height: .5em;
-      width: 2.4em;
-      border-radius: 5px;
-      left: -0.6em;
-      top: 0.2em;
-      background-color: white;
-      box-shadow: 0 6px 7px rgba(0, 0, 0, 0.3);
-      transition: .4s;
-    }
-
-    .slider_738:before,
-    .slider_738:after {
-      content: "";
-      display: block;
-    }
-
-    .slider_738:after {
-      background: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.15) 0) 0 50% / 50% 100%,
-        repeating-linear-gradient(90deg, rgb(255, 255, 255) 0, rgb(255, 255, 255), rgb(255, 255, 255) 20%, rgb(255, 255, 255) 20%, rgb(255, 255, 255) 40%) 0 50% / 50% 100%,
-        radial-gradient(circle at 50% 50%, rgb(255, 255, 255) 25%, transparent 26%);
-      background-repeat: no-repeat;
-      border: 0.25em solid transparent;
-      border-left: 0.4em solid #ffffff;
-      border-right: 0 solid transparent;
-      transition: border-left-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
-      transform: translateX(-22.5%) rotate(90deg);
-      transform-origin: 25% 50%;
-      position: relative;
-      top: 0.5em;
-      left: 0.55em;
-      width: 2em;
-      height: 1em;
-      box-sizing: border-box;
-    }
-
-    .chk_738:checked+.slider_738 {
-      background-color: limegreen;
-    }
-
-    .chk_738:focus+.slider_738 {
-      box-shadow: 0 0 1px limegreen;
-    }
-
-    .chk_738:checked+.slider_738:before {
-      transform: translateY(2.3em);
-    }
-
-    .chk_738:checked+.slider_738:after {
-      transform: rotateZ(90deg) rotateY(180deg) translateY(0.45em) translateX(-1.4em);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-        Arial, sans-serif;
-    }
-
-    body {
-      background-color: #050509;
-      color: #c7c7c8;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    /* =========================================
-           MOBILE LAYOUT (Default / Mobile-First)
-           ========================================= */
-    .app-container {
-      width: 100%;
-      max-width: 480px;
-      background-color: #050509;
-      min-height: 100vh;
-      position: relative;
-      padding-bottom: 80px;
-      border-left: 1px solid #56585d;
-      border-right: 1px solid #56585d;
-      transition: all 0.3s ease;
-    }
-
-    .app-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .app-header h1 {
-      color: #ffffff;
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .profile-icon {
-      width: 36px;
-      height: 36px;
-      background-color: #56585d;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    /* Video Player */
-    .video-wrapper {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background-color: #000;
-      position: relative;
-    }
-
-    .video-wrapper iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Info Section */
-    .video-info {
-      padding: 24px 20px;
-    }
-
-    .video-title {
-      color: #ffffff;
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
-
-    .video-desc {
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-bottom: 24px;
-    }
-
-    /* Buttons */
-    .btn-primary {
-      background-color: #24f553;
-      color: #050509;
-      border: none;
-      padding: 16px 24px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 1rem;
-      width: 100%;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn-primary:hover {
-      background-color: #189f38;
-      color: #ffffff;
-    }
-
-    /* Tags / Categories */
-    .categories {
-      margin-top: 8px;
-    }
-
-    .categories h3 {
-      color: #ffffff;
-      font-size: 1.1rem;
-      margin-bottom: 12px;
-      padding: 0 20px;
-    }
-
-    .tags-container {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding: 0 20px;
-      scrollbar-width: none;
-    }
-
-    .tags-container::-webkit-scrollbar {
-      display: none;
-    }
-
-    .tag {
-      background-color: #2f4a39;
-      color: #24f553;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    a {
-      color: #24f553;
-      text-decoration: none;
-    }
-
-    .tag:hover {
-      background-color: #189f38;
-      color: #fff;
-    }
-
-    /* Bottom Navigation (Mobile) */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      background-color: #050509;
-      display: flex;
-      justify-content: space-around;
-      padding: 16px 0;
-      border-top: 1px solid #56585d;
-      z-index: 10;
-    }
-
-    .nav-item {
-      color: #56585d;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: color 0.2s ease;
-    }
-
-    .nav-item:hover {
-      color: #c7c7c8;
-    }
-
-    .nav-item.active {
-      color: #24f553;
-    }
-
-    @media (min-width: 768px) {
-      /* ... kode desktop Anda lainnya ... */
-
-      main {
-        padding: 0 40px;
-        max-width: 1200px;
-        margin: 0 auto;
-        /* Tambahkan dua baris ini agar di Desktop rata kiri */
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 20px;
-        /* <--- Mengatur jarak horizontal & vertikal antar kartu */
-        padding: 40px;
-        border-radius: 10px;
-      }
-
-      .main {
-        position: relative;
-        /* <--- PENTING: Agar efek hover .card_back tidak berantakan ke kartu lain */
-        width: 15em;
-        /* Menyesuaikan dengan lebar kartu */
-      }
-
-      /* ... sisa kode lainnya ... */
-      /* =========================================
-           DESKTOP LAYOUT (Layar > 768px)
-           ========================================= */
-      @media (min-width: 768px) {
-        body {
-          justify-content: flex-start;
-          /* Reset center alignment */
-        }
-
-        .app-container {
-          max-width: 100%;
-          margin-left: 240px;
-          /* Sisakan ruang untuk Sidebar */
-          border-left: none;
-          border-right: none;
-          padding-bottom: 40px;
-        }
-
-        /* Ubah Navigasi Bawah menjadi Sidebar Kiri */
-        .bottom-nav {
-          top: 0;
-          left: 0;
-          bottom: auto;
-          transform: none;
-          width: 240px;
-          height: 100vh;
-          flex-direction: column;
-          justify-content: flex-start;
-          padding-top: 40px;
-          padding-left: 40px;
-          gap: 32px;
-          border-top: none;
-          border-right: 1px solid #56585d;
-        }
-
-        .nav-item {
-          font-size: 1.1rem;
-        }
-
-        /* Penyesuaian Ruang Utama */
-        .app-header {
-          padding: 40px;
-        }
-
-        .app-header h1 {
-          font-size: 2rem;
-        }
-
-        main {
-          padding: 0 40px;
-          max-width: 1200px;
-          /* Batasi lebar maksimal konten */
-          margin: 0 auto;
-        }
-
-        .video-wrapper {
-          border-radius: 16px;
-          /* Tambahkan sudut melengkung pada desktop */
-          overflow: hidden;
-        }
-
-        /* Susun Judul & Tombol Bersebelahan */
-        .video-info {
-          padding: 32px 0;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 24px;
-        }
-
-        .video-info-text {
-          flex: 1;
-        }
-
-        .video-title {
-          font-size: 2.2rem;
-          margin-bottom: 12px;
-        }
-
-        .video-desc {
-          font-size: 1rem;
-          margin-bottom: 0;
-          max-width: 600px;
-        }
-
-        .btn-primary {
-          width: auto;
-          padding: 16px 48px;
-          font-size: 1.1rem;
-        }
-
-        /* Penyesuaian Kategori */
-        .categories {
-          margin-top: 16px;
-        }
-
-        .categories h3 {
-          padding: 0;
-          font-size: 1.4rem;
-          margin-bottom: 16px;
-        }
-
-        .tags-container {
-          padding: 0;
-        }
-
-        .tag {
-          padding: 12px 24px;
-          font-size: 1rem;
-        }
-      }
+   /* =========================================
+   RESET & BASE STYLES
+   ========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #050509;
+  color: #c7c7c8;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* =========================================
+   KONTEN UTAMA (MAIN & CARD)
+   ========================================= */
+main {
+  display: flex;
+  flex-direction: column; /* Membuat konten berderet ke bawah pada mobile */
+  gap: 35px;             /* MEMBERI SPACE KE BAWAH ANTAR KONTEN LIVE 1 & 2 */
+  padding: 20px;
+}
+
+.main {
+  position: relative;
+  width: 100%;
+  max-width: 20em;       /* Menyesuaikan lebar card */
+  margin: 0 auto;        /* Center item pada mobile */
+}
+
+.card {
+  width: 20em;
+  height: 15em;
+  background-color: #252525;
+  border-radius: 7px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fl {
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: .2s ease-in-out;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.fl:hover .fullscreen {
+  scale: 1.2;
+}
+
+.fl:hover .fullscreen_svg {
+  fill: white;
+}
+
+.fullscreen {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 5px;
+  background-color: #727890;
+  margin: 1em;
+  margin-right: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .2s ease-in-out;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+}
+
+.fullscreen_svg {
+  width: 15px;
+  height: 15px;
+  fill: rgb(177, 176, 176);
+  transition: .2s ease-in-out;
+}
+
+.card_back {
+  position: absolute;
+  width: 15em;
+  height: 13em;
+  background-color: rgba(30, 31, 38, 0.575);
+  border-radius: 7px;
+  margin-top: -5em;
+  margin-left: 0.7em;
+  transition: .2s ease-in-out;
+  z-index: -1;
+}
+
+.main:hover .card_back {
+  margin-top: -6.25em;
+  margin-left: 0em;
+  scale: 1.1;
+  height: 15.25em;
+  cursor: pointer;
+}
+
+.main:hover .fl {
+  opacity: 1;
+  cursor: pointer;
+  margin-right: 0.5em;
+}
+
+.data {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+}
+
+.img {
+  width: 2.25em;
+  height: 2.25em;
+  background-color: #252525;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 0.5em;
+  font-family: Montserrat, sans-serif;
+  color: white;
+}
+
+.text_m {
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.text_s {
+  font-size: 0.7em;
+}
+
+.btns {
+  display: flex;
+  gap: 0.5em;
+  transition: .2s ease-in-out;
+  margin-top: 10px;
+}
+
+.likes, .comments, .views {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.8em;
+  border-radius: 4px;
+  opacity: 0;
+  background-color: #444857;
+  transition: .2s ease-in-out;
+  padding: 2px 8px;
+}
+
+.likes_text, .comments_text, .views_text {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.8em;
+  margin-left: 0.25em;
+  color: white;
+}
+
+.likes_svg, .comments_svg, .views_svg {
+  width: 12px;
+  height: 12px;
+}
+.likes_svg { fill: rgb(204, 3, 3); }
+.comments_svg, .views_svg { fill: white; }
+
+.likes:hover, .comments:hover, .views:hover {
+  background-color: #5A5F73;
+  cursor: pointer;
+}
+
+.main:hover .likes, .main:hover .comments, .main:hover .views {
+  opacity: 1;
+}
+
+/* =========================================
+       MOBILE LAYOUT (Default)
+       ========================================= */
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  background-color: #050509;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 80px;
+  border-left: 1px solid #56585d;
+  border-right: 1px solid #56585d;
+  transition: all 0.3s ease;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.app-header h1 {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.profile-icon {
+  width: 36px;
+  height: 36px;
+  background-color: #56585d;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* MENU NAVIGASI BAWAH (MOBILE BERSIH & RAPI) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  background-color: #0a0a12;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 16px 10px;
+  border-top: 1px solid #2a2c30;
+  z-index: 100;
+}
+
+.nav-item {
+  color: #56585d;
+  font-size: 0.75rem; /* Dikecilkan sedikit agar muat rapi di mobile */
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  color: #c7c7c8;
+}
+
+.nav-item.active {
+  color: #24f553;
+}
+
+/* =========================================
+       DESKTOP LAYOUT (Layar > 768px)
+       ========================================= */
+/* =========================================
+       DESKTOP LAYOUT (Layar > 768px)
+       ========================================= */
+@media (min-width: 768px) {
+  body {
+    justify-content: flex-start;
+  }
+
+  .app-container {
+    max-width: calc(100% - 260px); /* Memastikan kontainer mengambil sisa layar setelah sidebar */
+    margin-left: 260px; /* Jarak pas untuk sidebar */
+    border-left: none;
+    border-right: none;
+    padding-bottom: 40px;
+    width: 100%;
+  }
+
+  /* Mengubah Navigasi Bawah Menjadi Sidebar Kiri yang Rapi */
+  .bottom-nav {
+    top: 0;
+    left: 0;
+    bottom: auto;
+    transform: none;
+    width: 260px;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 50px;
+    padding-left: 35px;
+    gap: 25px;
+    border-top: none;
+    border-right: 1px solid #2a2c30;
+    background-color: #050509;
+  }
+
+  .nav-item {
+    font-size: 1.05rem;
+    text-align: left;
+  }
+
+  .app-header {
+    padding: 40px 40px 20px 40px;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  /* Grid Konten di Desktop */
+  main {
+    display: flex;
+    flex-direction: row !important;  /* Memaksa berjejer ke samping */
+    flex-wrap: wrap;                 /* Otomatis turun ke bawah jika layar tidak muat */
+    gap: 40px;                       /* Jarak antar card horizontal & vertikal */
+    padding: 20px 40px;
+    max-width: 100%;
+    margin: 0;
+    justify-content: flex-start;     /* Berbaris dari kiri */
+  }
+
+  .main {
+    margin: 0;                       /* Reset auto-margin mobile */
+    width: 20em;                     /* Mengunci lebar pembungkus luar sesuai ukuran card */
+    max-width: none;
+  }
+}
+
   </style>
 </head>
 
 <body>
   <nav class="bottom-nav">
-    <div class="nav-item active">Halaman Utama</div>
-    <div class="nav-item">Siaran Langusng</div>
-    <div class="nav-item">Siaran Ulang</div>
-    <div class="nav-item">Jadwal Berikutnya</div>
+    <div class="nav-item active"><a href="index.html" style="text-decoration: none; color: #24f553;">Halaman Utama</a></div>
+    <div class="nav-item"><a href="index.html" style="text-decoration: none; color: #ffffff;">Siaran Langsung</a></div>
+    <div class="nav-item"><a href="index.html" style="text-decoration: none; color: #ffffff;">Siaran Ulang</a></div>
+    <div class="nav-item"><a href="index.html" style="text-decoration: none; color: #ffffff;">Jadwal Berikutnya</a></div>
   </nav>
 
   <div class="app-container">
@@ -903,8 +590,8 @@
             </svg>
           </div>
           <div class="text">
-            <div class="text_m">Live 1</div>
-            <div class="text_s">Live Match 1</div>
+            <div class="text_m">Live Fox HD 1</div>
+            <div class="text_s">Live Fox HD 1</div>
           </div>
         </div>
         <div class="btns">
@@ -913,21 +600,21 @@
               <path
                 d="M85.24 2.67C72.29-3.08 55.75 2.67 50 14.9 44.25 2 27-3.8 14.76 2.67 1.1 9.14-5.37 25 5.42 44.38 13.33 58 27 68.11 50 86.81 73.73 68.11 87.39 58 94.58 44.38c10.79-18.7 4.32-35.24-9.34-41.71Z">
               </path>
-            </svg><span class="likes_text">22</span>
+            </svg><span class="likes_text">2.201</span>
           </div>
           <div class="comments">
             <svg class="comments_svg" viewBox="-405.9 238 56.3 54.8" title="Comment">
               <path
                 d="M-391 291.4c0 1.5 1.2 1.7 1.9 1.2 1.8-1.6 15.9-14.6 15.9-14.6h19.3c3.8 0 4.4-.8 4.4-4.5v-31.1c0-3.7-.8-4.5-4.4-4.5h-47.4c-3.6 0-4.4.9-4.4 4.5v31.1c0 3.7.7 4.4 4.4 4.4h10.4v13.5z">
               </path>
-            </svg><span class="comments_text">12</span>
+            </svg><span class="comments_text">0</span>
           </div>
           <div class="views">
             <svg class="views_svg" viewBox="0 0 30.5 16.5" title="Views">
               <path
                 d="M15.3 0C8.9 0 3.3 3.3 0 8.3c3.3 5 8.9 8.3 15.3 8.3s12-3.3 15.3-8.3C27.3 3.3 21.7 0 15.3 0zm0 14.5c-3.4 0-6.2-2.8-6.2-6.2C9 4.8 11.8 2 15.3 2c3.4 0 6.2 2.8 6.2 6.2 0 3.5-2.8 6.3-6.2 6.3z">
               </path>
-            </svg><span class="views_text">332</span>
+            </svg><span class="views_text">256</span>
           </div>
         </div>
       </div>
@@ -1163,8 +850,8 @@
             </svg>
           </div>
           <div class="text">
-            <div class="text_m">Live 2</div>
-            <div class="text_s">Live Match 2</div>
+            <div class="text_m">Live Fox HD 2</div>
+            <div class="text_s">Live Match Fox HD 2</div>
           </div>
         </div>
         <div class="btns">
@@ -1173,21 +860,21 @@
               <path
                 d="M85.24 2.67C72.29-3.08 55.75 2.67 50 14.9 44.25 2 27-3.8 14.76 2.67 1.1 9.14-5.37 25 5.42 44.38 13.33 58 27 68.11 50 86.81 73.73 68.11 87.39 58 94.58 44.38c10.79-18.7 4.32-35.24-9.34-41.71Z">
               </path>
-            </svg><span class="likes_text">22</span>
+            </svg><span class="likes_text">1.269</span>
           </div>
           <div class="comments">
             <svg class="comments_svg" viewBox="-405.9 238 56.3 54.8" title="Comment">
               <path
                 d="M-391 291.4c0 1.5 1.2 1.7 1.9 1.2 1.8-1.6 15.9-14.6 15.9-14.6h19.3c3.8 0 4.4-.8 4.4-4.5v-31.1c0-3.7-.8-4.5-4.4-4.5h-47.4c-3.6 0-4.4.9-4.4 4.5v31.1c0 3.7.7 4.4 4.4 4.4h10.4v13.5z">
               </path>
-            </svg><span class="comments_text">12</span>
+            </svg><span class="comments_text">0</span>
           </div>
           <div class="views">
             <svg class="views_svg" viewBox="0 0 30.5 16.5" title="Views">
               <path
                 d="M15.3 0C8.9 0 3.3 3.3 0 8.3c3.3 5 8.9 8.3 15.3 8.3s12-3.3 15.3-8.3C27.3 3.3 21.7 0 15.3 0zm0 14.5c-3.4 0-6.2-2.8-6.2-6.2C9 4.8 11.8 2 15.3 2c3.4 0 6.2 2.8 6.2 6.2 0 3.5-2.8 6.3-6.2 6.3z">
               </path>
-            </svg><span class="views_text">332</span>
+            </svg><span class="views_text">10.231</span>
           </div>
         </div>
       </div>
@@ -1196,6 +883,27 @@
 
     </main>
   </div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 1. Cari semua elemen yang menampilkan teks views
+      const viewElements = document.querySelectorAll('.views_text');
+      
+      viewElements.forEach(function(element) {
+        // 2. Generate angka acak antara 200 dan 100.000
+        const min = 200;
+        const max = 100000;
+        const randomViews = Math.floor(Math.random() * (max - min + 1)) + min;
+        
+        // 3. Format angka ke dalam ribuan lokal Indonesia (contoh: 12.500)
+        const formattedViews = randomViews.toLocaleString('id-ID');
+        
+        // 4. Masukkan angka yang sudah diformat ke dalam elemen HTML
+        element.textContent = formattedViews;
+      });
+    });
+  </script>
 </body>
 
 </html>

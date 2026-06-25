@@ -77,9 +77,38 @@
       border: none;
     }
 
+    /* BARU: Video Stats Container (Views, Likes, Comments) */
+    .video-stats {
+      display: flex;
+      gap: 12px;
+      padding: 12px 20px 0 20px;
+    }
+
+    .stat-box {
+      display: flex;
+      align-items: center;
+      background-color: #1a1a24;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffffff;
+      border: 1px solid #2a2c35;
+    }
+
+    .stat-box svg {
+      width: 14px;
+      height: 14px;
+      margin-right: 6px;
+    }
+
+    .stat-box.likes svg { fill: #ff3b30; }
+    .stat-box.comments svg { fill: #ffffff; }
+    .stat-box.views svg { fill: #24f553; }
+
     /* Info Section */
     .video-info {
-      padding: 24px 20px;
+      padding: 16px 20px 24px 20px;
     }
 
     .video-title {
@@ -196,19 +225,16 @@
     @media (min-width: 768px) {
       body {
         justify-content: flex-start;
-        /* Reset center alignment */
       }
 
       .app-container {
         max-width: 100%;
         margin-left: 240px;
-        /* Sisakan ruang untuk Sidebar */
         border-left: none;
         border-right: none;
         padding-bottom: 40px;
       }
 
-      /* Ubah Navigasi Bawah menjadi Sidebar Kiri */
       .bottom-nav {
         top: 0;
         left: 0;
@@ -229,7 +255,6 @@
         font-size: 1.1rem;
       }
 
-      /* Penyesuaian Ruang Utama */
       .app-header {
         padding: 40px;
       }
@@ -241,19 +266,21 @@
       main {
         padding: 0 40px;
         max-width: 1200px;
-        /* Batasi lebar maksimal konten */
         margin: 0 auto;
       }
 
       .video-wrapper {
         border-radius: 16px;
-        /* Tambahkan sudut melengkung pada desktop */
         overflow: hidden;
       }
 
-      /* Susun Judul & Tombol Bersebelahan */
+      /* Penyesuaian Bar Stats Desktop */
+      .video-stats {
+        padding: 16px 0 0 0;
+      }
+
       .video-info {
-        padding: 32px 0;
+        padding: 24px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -281,7 +308,6 @@
         font-size: 1.1rem;
       }
 
-      /* Penyesuaian Kategori */
       .categories {
         margin-top: 16px;
       }
@@ -306,10 +332,10 @@
 
 <body>
   <nav class="bottom-nav">
-    <div class="nav-item active">Halaman Utama</div>
-    <div class="nav-item">Siaran Langusng</div>
-    <div class="nav-item">Siaran Ulang</div>
-    <div class="nav-item">Jadwal Berikutnya</div>
+    <div class="nav-item active"><a href="index.html" style="text-decoration: none; color: #24f553;">Halaman Utama</a></div>
+    <div class="nav-item"><a href="index.html" style="text-decoration: none; color: #ffffff;">Siaran Langsung</a></div>
+    <div class="nav-item"><a href="index.html" style="text-decoration: none; color: #ffffff;">Siaran Ulang</a></div>
+    <div class="nav-item"><a href="index.html" style="text-decoration: none; color: #ffffff;">Jadwal Berikutnya</a></div>
   </nav>
 
   <div class="app-container">
@@ -320,12 +346,32 @@
 
     <main>
       <div class="video-wrapper">
-
         <iframe id="match-player" src="https://streams.esportex.site/player#djIvdWVsNA=="
           sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
           class="absolute inset-0 w-full h-full border-0" allowfullscreen=""
           allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="no-referrer"
           loading="eager"></iframe>
+      </div>
+
+      <div class="video-stats">
+        <div class="stat-box views">
+          <svg viewBox="0 0 30.5 16.5">
+            <path d="M15.3 0C8.9 0 3.3 3.3 0 8.3c3.3 5 8.9 8.3 15.3 8.3s12-3.3 15.3-8.3C27.3 3.3 21.7 0 15.3 0zm0 14.5c-3.4 0-6.2-2.8-6.2-6.2C9 4.8 11.8 2 15.3 2c3.4 0 6.2 2.8 6.2 6.2 0 3.5-2.8 6.3-6.2 6.3z"/>
+          </svg>
+          <span id="live-views">0</span>
+        </div>
+        <div class="stat-box likes">
+          <svg viewBox="-2 0 105 92">
+            <path d="M85.24 2.67C72.29-3.08 55.75 2.67 50 14.9 44.25 2 27-3.8 14.76 2.67 1.1 9.14-5.37 25 5.42 44.38 13.33 58 27 68.11 50 86.81 73.73 68.11 87.39 58 94.58 44.38c10.79-18.7 4.32-35.24-9.34-41.71Z"/>
+          </svg>
+          <span>2.201</span>
+        </div>
+        <div class="stat-box comments">
+          <svg viewBox="-405.9 238 56.3 54.8">
+            <path d="M-391 291.4c0 1.5 1.2 1.7 1.9 1.2 1.8-1.6 15.9-14.6 15.9-14.6h19.3c3.8 0 4.4-.8 4.4-4.5v-31.1c0-3.7-.8-4.5-4.4-4.5h-47.4c-3.6 0-4.4.9-4.4 4.5v31.1c0 3.7.7 4.4 4.4 4.4h10.4v13.5z"/>
+          </svg>
+          <span>0</span>
+        </div>
       </div>
 
       <section class="video-info">
@@ -361,6 +407,20 @@
       </section>
     </main>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const viewElement = document.getElementById("live-views");
+      if (viewElement) {
+        const min = 200;
+        const max = 100000;
+        // Rumus acak rentang angka
+        const randomViews = Math.floor(Math.random() * (max - min + 1)) + min;
+        // Format menjadi ribuan lokal Indonesia (contoh: 84.531)
+        viewElement.textContent = randomViews.toLocaleString("id-ID");
+      }
+    });
+  </script>
 </body>
 
 </html>
