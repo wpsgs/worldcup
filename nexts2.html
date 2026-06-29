@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pibli TV - Responsive Concept</title>
+    <style>
+        /* =========================================
+           RESET & BASE STYLES
+           ========================================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family:
+                -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+                Arial, sans-serif;
+        }
+
+        body {
+            background-color: #050509;
+            color: #c7c7c8;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* =========================================
+           MOBILE LAYOUT (Default / Mobile-First)
+           ========================================= */
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: #050509;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 80px;
+            border-left: 1px solid #56585d;
+            border-right: 1px solid #56585d;
+            transition: all 0.3s ease;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .app-header h1 {
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #56585d;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Video Player */
+        .video-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #000;
+            position: relative;
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* BARU: Video Stats Container (Views, Likes, Comments) */
+        .video-stats {
+            display: flex;
+            gap: 12px;
+            padding: 12px 20px 0 20px;
+        }
+
+        .stat-box {
+            display: flex;
+            align-items: center;
+            background-color: #1a1a24;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+            border: 1px solid #2a2c35;
+        }
+
+        .stat-box svg {
+            width: 14px;
+            height: 14px;
+            margin-right: 6px;
+        }
+
+        .stat-box.likes svg {
+            fill: #ff3b30;
+        }
+
+        .stat-box.comments svg {
+            fill: #ffffff;
+        }
+
+        .stat-box.views svg {
+            fill: #24f553;
+        }
+
+        /* Info Section */
+        .video-info {
+            padding: 16px 20px 24px 20px;
+        }
+
+        .video-title {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .video-desc {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #24f553;
+            color: #050509;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #189f38;
+            color: #ffffff;
+        }
+
+        /* Tags / Categories */
+        .categories {
+            margin-top: 8px;
+        }
+
+        .categories h3 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            padding: 0 20px;
+        }
+
+        .tags-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 0 20px;
+            scrollbar-width: none;
+        }
+
+        .tags-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tag {
+            background-color: #2f4a39;
+            color: #24f553;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        a {
+            color: #24f553;
+            text-decoration: none;
+        }
+
+        .tag:hover {
+            background-color: #189f38;
+            color: #fff;
+        }
+
+        /* Bottom Navigation (Mobile) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background-color: #050509;
+            display: flex;
+            justify-content: space-around;
+            padding: 16px 0;
+            border-top: 1px solid #56585d;
+            z-index: 10;
+        }
+
+        .nav-item {
+            color: #56585d;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover {
+            color: #c7c7c8;
+        }
+
+        .nav-item.active {
+            color: #24f553;
+        }
+
+        /* =========================================
+           DESKTOP LAYOUT (Layar > 768px)
+           ========================================= */
+        @media (min-width: 768px) {
+            body {
+                justify-content: flex-start;
+            }
+
+            .app-container {
+                max-width: 100%;
+                margin-left: 240px;
+                border-left: none;
+                border-right: none;
+                padding-bottom: 40px;
+            }
+
+            .bottom-nav {
+                top: 0;
+                left: 0;
+                bottom: auto;
+                transform: none;
+                width: 240px;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 40px;
+                padding-left: 40px;
+                gap: 32px;
+                border-top: none;
+                border-right: 1px solid #56585d;
+            }
+
+            .nav-item {
+                font-size: 1.1rem;
+            }
+
+            .app-header {
+                padding: 40px;
+            }
+
+            .app-header h1 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 0 40px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .video-wrapper {
+                border-radius: 16px;
+                overflow: hidden;
+            }
+
+            /* Penyesuaian Bar Stats Desktop */
+            .video-stats {
+                padding: 16px 0 0 0;
+            }
+
+            .video-info {
+                padding: 24px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 24px;
+            }
+
+            .video-info-text {
+                flex: 1;
+            }
+
+            .video-title {
+                font-size: 2.2rem;
+                margin-bottom: 12px;
+            }
+
+            .video-desc {
+                font-size: 1rem;
+                margin-bottom: 0;
+                max-width: 600px;
+            }
+
+            .btn-primary {
+                width: auto;
+                padding: 16px 48px;
+                font-size: 1.1rem;
+            }
+
+            .categories {
+                margin-top: 16px;
+            }
+
+            .categories h3 {
+                padding: 0;
+                font-size: 1.4rem;
+                margin-bottom: 16px;
+            }
+
+            .tags-container {
+                padding: 0;
+            }
+
+            .tag {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="bottom-nav">
+        <div class="nav-item active"><a href="index.html" style="text-decoration: none; color: #24f553;">Halaman
+                Utama</a>
+        </div>
+        <div class="nav-item"><a href="index.html" style="text-decoration: none; color: #ffffff;">Siaran Langsung</a>
+        </div>
+        <div class="nav-item"><a href="index.html" style="text-decoration: none; color: #ffffff;">Siaran Ulang</a></div>
+        <div class="nav-item"><a href="index.html" style="text-decoration: none; color: #ffffff;">Jadwal Berikutnya</a>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Pibli TV</h1>
+            <div class="profile-icon"></div>
+        </header>
+
+        <main>
+            <div class="video-wrapper">
+                <iframe id="match-player" src="https://tvri.lapakstreaming.live/agdAcBn"
+                    sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
+                    class="absolute inset-0 w-full h-full border-0" allowfullscreen=""
+                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="no-referrer"
+                    loading="eager"></iframe>
+
+
+                <!-- Live World Cup <iframe id="match-player" src="https://streams.esportex.site/player#c28vaGQx"
+                    sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
+                    class="absolute inset-0 w-full h-full border-0" allowfullscreen=""
+                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="no-referrer"
+                    loading="eager"></iframe>
+
+
+                <iframe id="match-player" src="https://streams.esportex.site/player#dXMvZm94Mg=="
+          class="absolute inset-0 w-full h-full border-0" allowfullscreen=""
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="no-referrer" loading="eager"
+          sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"></iframe>
+
+
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/twUTLKbgVLo?si=NKBaAOYiROTU9Qxl"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+            </div>
+
+
+            <div class="video-stats">
+                <div class="stat-box views">
+                    <svg viewBox="0 0 30.5 16.5">
+                        <path
+                            d="M15.3 0C8.9 0 3.3 3.3 0 8.3c3.3 5 8.9 8.3 15.3 8.3s12-3.3 15.3-8.3C27.3 3.3 21.7 0 15.3 0zm0 14.5c-3.4 0-6.2-2.8-6.2-6.2C9 4.8 11.8 2 15.3 2c3.4 0 6.2 2.8 6.2 6.2 0 3.5-2.8 6.3-6.2 6.3z" />
+                    </svg>
+                    <span id="live-views">0</span>
+                </div>
+                <div class="stat-box likes">
+                    <svg viewBox="-2 0 105 92">
+                        <path
+                            d="M85.24 2.67C72.29-3.08 55.75 2.67 50 14.9 44.25 2 27-3.8 14.76 2.67 1.1 9.14-5.37 25 5.42 44.38 13.33 58 27 68.11 50 86.81 73.73 68.11 87.39 58 94.58 44.38c10.79-18.7 4.32-35.24-9.34-41.71Z" />
+                    </svg>
+                    <span>1.269</span>
+                </div>
+                <div class="stat-box comments">
+                    <svg viewBox="-405.9 238 56.3 54.8">
+                        <path
+                            d="M-391 291.4c0 1.5 1.2 1.7 1.9 1.2 1.8-1.6 15.9-14.6 15.9-14.6h19.3c3.8 0 4.4-.8 4.4-4.5v-31.1c0-3.7-.8-4.5-4.4-4.5h-47.4c-3.6 0-4.4.9-4.4 4.5v31.1c0 3.7.7 4.4 4.4 4.4h10.4v13.5z" />
+                    </svg>
+                    <span>0</span>
+                </div>
+            </div>
+
+
+            <section class="video-info">
+                <div class="video-info-text">
+                    <h2 class="video-title">Live 2</h2>
+                    <p class="video-desc">
+                        Tonton siaran langsung pertandingan hari ini. Kualitas HD tanpa
+                        buffering.
+                    </p>
+                </div>
+                <button class="btn-primary">Tonton Sekarang</button>
+            </section>
+
+            <section class="categories">
+                <h3>Sedang Tren</h3>
+                <div class="tags-container">
+                    <div class="tag">
+                        <a href="next.html">
+                            <span role="img" aria-label="Trophy">📺</span> Server 1
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const viewElement = document.getElementById("live-views");
+            if (viewElement) {
+                const min = 200;
+                const max = 100000;
+                // Rumus acak rentang angka
+                const randomViews = Math.floor(Math.random() * (max - min + 1)) + min;
+                // Format menjadi ribuan lokal Indonesia (contoh: 84.531)
+                viewElement.textContent = randomViews.toLocaleString("id-ID");
+            }
+        });
+    </script>
+</body>
+
+</html>
